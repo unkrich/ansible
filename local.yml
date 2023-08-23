@@ -3,7 +3,7 @@
     source_key: "./.ssh/id_rsa"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
     personal: "{{ lookup('env', 'HOME') }}/Developer/unkrich"
-    work: "{{ lookup('env', 'HOME') }}/Developer/superpower"
+    work: "{{ lookup('env', 'HOME') }}/Developer/superpowerdotcom"
     brew_cask_packages:
       - 1password
       - cron
@@ -72,3 +72,4 @@
     - include: tasks/setup-chrome.yml
     - include: tasks/setup-osx-defaults.yml
     - include: tasks/personal-projects.yml
+    - include: superpower/work-projects.yml

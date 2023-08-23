@@ -1,16 +1,11 @@
 - name: Superpower exists
-  shell: mkdir -p {{ work }}/superpower
+  shell: mkdir -p {{ work }}
   tags:
     - work-project
 
 - name: Superpower
   ansible.builtin.git:
-    repo: 'git@github.com:superpower/superpower.git'
-    bare: true
+    repo: 'git@github.com:superpowerdotcome/superpower.git'
     dest: "{{ work }}/superpower"
-  tags:
-    - work-project
-- name: Superpower Main Checkout
-  shell: cd {{ work }}/superpower && git fetch && git checkout main
   tags:
     - work-project
