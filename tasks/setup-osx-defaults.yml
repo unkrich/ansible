@@ -1,0 +1,294 @@
+# Remap Caps Lock to CTRL
+- name: Remap caps lock to CTRL
+  shell: hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0}]}'
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+
+# Enable full keyboard control - tab in modals
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleKeyboardUIMode
+    type: int
+    value: 3
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# Delay / Repeat
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: 10
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: 1
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+  
+# Disable automatic period substitution
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticPeriodSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# Disable smart quotes as they're annoying when typing code
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticQuoteSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# Disable smart dashes
+- osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticDashSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Disable automatic capitalization
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticCapitalizationEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+
+- name: Disable automatic spelling correction
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+
+- name: Create screenshots directory
+  shell: mkdir -p ~/Pictures/screenshots
+  tags:
+  - macos
+  - osx_defaults
+  - screenshots
+
+- name: Set screenshots directory
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: location
+    type: string
+    value: ~/Pictures/screenshots
+  tags:
+    - macos
+    - osx_defaults
+    - screenshots
+
+- name: Disable shadow in screenshots
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: disable-shadow
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - screenshots
+
+- name: Save screenshots as png
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: type
+    type: string
+    value: png
+  tags:
+    - macos
+    - osx_defaults
+    - screenshots
+
+- name: Hide dock and set to left-hand side
+  osx_defaults:
+    domain: com.apple.dock
+    key: orientation
+    type: string
+    value: left
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Don't show recent applications in dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Set icon size of Dock items to 30 pixels
+  osx_defaults:
+    domain: com.apple.dock
+    key: tilesize
+    type: int
+    value: 30
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Speed up Mission Control animation
+  osx_defaults:
+    domain: com.apple.dock
+    key: expose-animation-duration
+    type: float
+    value: 0.1
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Automatically hide dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Remove the auto-hiding Dock delay
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide-delay
+    type: float
+    value: 0.0001
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Remove the auto-hiding Dock animation
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide-time-modifier
+    type: float
+    value: 0.0001
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Don't rearrange spaces based on recent use
+  osx_defaults:
+    domain: com.apple.dock
+    key: mru-spaces
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Don't animate app launches
+  osx_defaults:
+    domain: com.apple.dock
+    key: launchanim
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+- name: Autohide menubar
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: _HIHideMenuBar
+    type: bool
+    value: true
+  tags:
+    - macos
+    - osx_defaults
+    - dock
+
+
+- name: Dockutil | Remove all dock items
+  shell: dockutil --remove all --no-restart
+
+- name: Dockutil | Adding items
+  shell: dockutil --add '{{ item.path }}' --position {{ item.pos }}
+  with_items: "{{ dockitems_to_persist }}"
+  loop_control:
+    label: "{{item}}"
+
+
+  #### FINDER ####
+
+  # Preferences - show filename extensions
+  # system.defaults.NSGlobalDomain.AppleShowAllExtensions = true;
+
+  # Enable showing dotfiles (just hold Cmd + Shift + . (dot) in a finder window)
+  # system.defaults.NSGlobalDomain.AppleShowAllFiles = true;
+
+  # Show full path in finder
+  # system.defaults.finder._FXShowPosixPathInTitle = true;
+ 
+  # Disable the "Are you sure you want to open this application" dialog
+  # system.defaults.LaunchServices.LSQuarantine = false;
+
+  # Disable the warning when changing a file extension
+  # system.defaults.finder.FXEnableExtensionChangeWarning = false;
+
+  # Use list view in all Finder windows by default
+  # system.defaults.finder.FXPreferredViewStyle = "Nlsv";
+  
+ # Disable animations when opening and closing windows 
+  # system.defaults.NSGlobalDomain.NSAutomaticWindowAnimationsEnabled = false;
+
+  # Accelerated playback when adjusting the window size.
+  # system.defaults.NSGlobalDomain.NSWindowResizeTime = 0.001;
+  
+  # Finder: allow quitting via command Q
+  # system.defaults.finder.QuitMenuItem = true;
+
+  # Expand save and print panel by default
+  # system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
+  # system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
+  # system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint = true;
+  # system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint2 = true;
+

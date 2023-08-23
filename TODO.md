@@ -1,3 +1,6 @@
+Install Brew
+
+
 ### Vim plug is not installing in the correct location
 ??
 

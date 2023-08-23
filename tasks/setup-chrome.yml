@@ -1,0 +1,40 @@
+- name: Chrome - get default browser
+  shell: defaultbrowser | sed 's/Current:\ //' | head -1
+  register: defaultbrowser_value
+  changed_when: False
+  tags:
+    - chrome
+    - install
+    - macos
+
+- name: Chrome - set as default browser
+  command: defaultbrowser chrome
+  become: true
+  when: defaultbrowser_value.stdout != "chrome"
+  tags:
+    - chrome
+    - install
+    - macos
+
+- name: Chrome - create extensions directory for all users
+  become: true
+  file:
+    path: /Library/Application Support/Google/Chrome/External Extensions
+    state: directory
+  tags:
+    - chrome
+    - install
+    - macos
+
+# - name: Chrome - create json file to install extensions for all users
+  # become: true
+  # tags:
+    # - chrome
+    # - install
+    # - macos
+  # template:
+    # src: ../templates/chrome-extensions.json.j2
+    # dest: /Library/Application Support/Google/Chrome/External Extensions/{{ item.id }}.json
+  # with_items:
+    # - name: Cookie Inspector
+      # id: jgbbilmfbammlbbhmmgaagdkbkepnijn

@@ -2,30 +2,73 @@
   vars:
     source_key: "./.ssh/id_rsa"
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
-    personal: "{{ lookup('env', 'HOME') }}/personal"
-  pre_tasks:
-  - name: Update Apt
-    become: true
-    apt:
-      force_apt_get: true
-      update_cache: true
-      state: present
-    tags:
-      - install
-      - core
+    personal: "{{ lookup('env', 'HOME') }}/Developer/unkrich"
+    work: "{{ lookup('env', 'HOME') }}/Developer/superpower"
+    brew_cask_packages:
+      - 1password
+      - cron
+      - discord
+      - docker
+      - google-chrome
+      - hpedrorodrigues/tools/dockutil
+      - iterm2
+      - ledger-live
+      - linear-linear
+      - notion
+      - pgadmin4
+      - postman
+      - qbittorrent
+      - slack
+      - sublime-text
+      - superhuman
+      - zoom
+    brew_packages:
+      - autoconf
+      - defaultbrowser
+      - docker-compose
+      - docker-machine
+      - jq
+      - neovim
+      - tmux
+      - tree
+      - zsh-syntax-highlighting
+    dockitems_to_persist:
+      - name: Google Chrome
+        path: "/Applications/Google Chrome.app"
+        pos: 1
+      - name: Messages
+        path: "/Applications/Messages.app"
+        pos: 2
+      - name: Slack
+        path: "/Applications/Slack.app"
+        pos: 3
+      - name: Discord
+        path: "/Applications/Discord.app"
+        pos: 4
+      - name: Cron
+        path: "/Applications/Cron.app"
+        pos: 5
+      - name: Superhuman
+        path: "/Applications/Superhuman.app"
+        pos: 6
+      - name: Notion
+        path: "/Applications/Notion.app"
+        pos: 7
+      - name: Linear
+        path: "/Applications/Linear.app"
+        pos: 8
+      - name: iTerm
+        path: "/Applications/iTerm.app"
+        pos: 9
+      - name: System Settings
+        path: "/Applications/System Settings.app"
+        pos: 10
+    install_homebrew_if_missing: true
+    upgrade_homebrew_packages: false
   tasks:
     - include: tasks/ssh.yml
     - include: tasks/git-setup.yml
-    - include: tasks/core-setup.yml
-    - include: tasks/node-setup.yml
-    - include: tasks/npm-packages.yml
-    - include: tasks/zsh-setup.yml
-    - include: tasks/slack-setup.yml
-    - include: tasks/personal-projects.yml
-    - include: tasks/nvim-setup.yml
-    - include: tasks/brave.yml
-    - include: tasks/debugger.yml
-    - include: tasks/dotfiles.yml
     - include: tasks/productivity-tools.yml
-    - include: tasks/lsp.yml
-
+    - include: tasks/setup-chrome.yml
+    - include: tasks/setup-osx-defaults.yml
+    - include: tasks/personal-projects.yml

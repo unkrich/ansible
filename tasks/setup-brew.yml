@@ -1,0 +1,7 @@
+- name: Homebrew
+  shell: curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  tags: 
+    - homebrew
+    - brew
+    - install
+    - macos
