@@ -22,3 +22,7 @@
     - install
     - dotfiles
     - stow
+- name: Start skhd
+  command: skhd --start-service
+- name: Restart skhd
+  command: /usr/local/bin/brew services restart skhd

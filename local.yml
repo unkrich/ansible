@@ -11,6 +11,7 @@
       - docker
       - google-chrome
       - hpedrorodrigues/tools/dockutil
+      - karabiner-elements
       - iterm2
       - ledger-live
       - linear-linear
@@ -27,8 +28,11 @@
       - defaultbrowser
       - docker-compose
       - docker-machine
+      - fzf
       - jq
+      - koekeishiya/formulae/skhd
       - neovim
+      - stow
       - tmux
       - tree
       - zsh-syntax-highlighting
