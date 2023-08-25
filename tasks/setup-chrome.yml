@@ -36,5 +36,5 @@
     # src: ../templates/chrome-extensions.json.j2
     # dest: /Library/Application Support/Google/Chrome/External Extensions/{{ item.id }}.json
   # with_items:
-    # - name: Cookie Inspector
-      # id: jgbbilmfbammlbbhmmgaagdkbkepnijn
+    # - name: Bubbles Async Video Collaboration
+      # id: ppbfhhgcdehhbjigifndnfmcihegokbb

@@ -25,15 +25,21 @@
       - zoom
     brew_packages:
       - autoconf
+      - clangd
       - defaultbrowser
       - docker-compose
       - docker-machine
       - fzf
       - jq
       - koekeishiya/formulae/skhd
+      - lua-language-server
       - neovim
+      - pyright
+      - ripgrep
+      - rust-analyzer
       - stow
       - tmux
+      - typescript-language-server
       - tree
       - zsh-syntax-highlighting
     dockitems_to_persist:
@@ -72,6 +78,7 @@
   tasks:
     - include: tasks/ssh.yml
     - include: tasks/git-setup.yml
+    - include: tasks/packer-setup.yml
     - include: tasks/productivity-tools.yml
     - include: tasks/setup-chrome.yml
     - include: tasks/setup-osx-defaults.yml
