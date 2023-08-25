@@ -30,10 +30,12 @@
       - docker-compose
       - docker-machine
       - fzf
+      - fzy
       - jq
       - koekeishiya/formulae/skhd
       - lua-language-server
       - neovim
+      - node
       - pyright
       - ripgrep
       - rust-analyzer
@@ -41,6 +43,7 @@
       - tmux
       - typescript-language-server
       - tree
+      - yarn
       - zsh-syntax-highlighting
     dockitems_to_persist:
       - name: Google Chrome
