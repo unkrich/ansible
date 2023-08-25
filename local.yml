@@ -27,6 +27,7 @@
       - autoconf
       - clangd
       - defaultbrowser
+      - direnv
       - docker-compose
       - docker-machine
       - fzf
