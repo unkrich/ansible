@@ -25,6 +25,7 @@
       - zoom
     brew_packages:
       - autoconf
+      - awscli
       - clangd
       - defaultbrowser
       - direnv
