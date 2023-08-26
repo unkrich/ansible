@@ -1,3 +1,517 @@
+- name: Dockutil | Remove all dock items
+  shell: dockutil --remove all --no-restart
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+- name: Dockutil | Adding items
+  shell: dockutil --add '{{ item.path }}' --position {{ item.pos }}
+  with_items: "{{ dockitems_to_persist }}"
+  loop_control:
+    label: "{{item}}"
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+
+- name: Hide Dock and set to left-hand side
+  osx_defaults:
+    domain: com.apple.dock
+    key: orientation
+    value: left
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+- name: Remove auto-hiding Dock delay
+  osx_defaults:
+    domain: com.apple.Dock
+    key: autohide-delay
+    value: 0.0001
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+- name: Remove animation when hiding/showing Dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide-time-modifier
+    value: 0
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+- name: Automatically hide and show the Dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    value: true
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+- name: Don't show recent applications in Dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    value: false
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+- name: Set Dock icon size to 30 pixels
+  osx_defaults:
+    domain: com.apple.dock
+    key: tilesize
+    value: 30
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+- name: Speed up Mission Control animations
+  osx_defaults:
+    domain: com.apple.dock
+    key: expose-animation-duration
+    value: 0.1
+  tags:
+    - dock
+    - macos
+    - osx_defaults
+
+- name: Disable automatic capitalization
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticCapitalizationEnabled
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Disable automatic capitalization as it's annoying when typing code"
+
+- name: Disable smart dashes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticDashSubstitutionEnabled
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Disable smart dashes as they're annoying when typing code"
+
+- name: Disable automatic period substitution
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticPeriodSubstitutionEnabled
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Disable automatic period substitution as it's annoying when typing code"
+
+- name: Disable smart quotes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticQuoteSubstitutionEnabled
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Disable smart quotes as they're annoying when typing code"
+
+- name: Disable automatic spelling correction
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticSpellingCorrectionEnabled
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Disable auto-correct"
+
+- name: Set AppleKeyboardUIMode
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleKeyboardUIMode
+    value: 3
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Set caps lock to control (e.g. enable Tab in modal dialogs)"
+
+- name: Set initial key repeat
+  osx_defaults:
+    domain: -g
+    key: InitialKeyRepeat
+    value: 10
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Set keyboard delay / repeat"
+
+- name: Set key repeat
+  osx_defaults:
+    domain: -g
+    key: KeyRepeat
+    value: 1
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Set keyboard delay / repeat"
+
+- name: Run capslocktoctl script
+  script: scripts/capslocktoctl.scpt
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
+  description: "Set caps lock to control"
+
+- name: Show filename extensions
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    value: true
+    state: present
+  tags: 
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Show dotfiles
+  osx_defaults:
+    domain: -g
+    key: AppleShowAllFiles
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Show full path in Finder
+  osx_defaults:
+    domain: com.apple.finder
+    key: _FXShowPosixPathInTitle
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Enable quitting Finder via ⌘ + Q
+  osx_defaults:
+    domain: com.apple.finder
+    key: QuitMenuItem
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Show icons for various desktop items
+  osx_defaults:
+    domain: com.apple.finder
+    key: "{{ item.key }}"
+    value: true
+    state: present
+  loop:
+    - { key: ShowExternalHardDrivesOnDesktop }
+    - { key: ShowHardDrivesOnDesktop }
+    - { key: ShowMountedServersOnDesktop }
+    - { key: ShowRemovableMediaOnDesktop }
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Disable file extension change warning
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXEnableExtensionChangeWarning
+    value: false
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Avoid creating .DS_Store files on network volumes
+  osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteNetworkStores
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Avoid creating .DS_Store files on USB volumes
+  osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteUSBStores
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Automatically open new Finder window when volume is mounted
+  osx_defaults:
+    domain: com.apple.frameworks.diskimages
+    key: "{{ item.key }}"
+    value: true
+    state: present
+  loop:
+    - { key: auto-open-ro-root }
+    - { key: auto-open-rw-root }
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Open window for new removable disk
+  osx_defaults:
+    domain: com.apple.finder
+    key: OpenWindowForNewRemovableDisk
+    value: true
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Set default Finder view style to list view
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    value: "Nlsv"
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Disable "Are you sure you want to open this application?" dialog
+  osx_defaults:
+    domain: com.apple.LaunchServices
+    key: LSQuarantine
+    value: false
+    state: present
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Restart Finder
+  shell: killall Finder
+  changed_when: false
+  tags:
+    - finder
+    - macos
+    - osx_defaults
+
+- name: Set Spotlight search categories
+  osx_defaults:
+    domain: com.apple.spotlight
+    key: orderedItems
+    value:
+      - '{"enabled" = 1;"name" = "APPLICATIONS";}'
+      - '{"enabled" = 1;"name" = "SYSTEM_PREFS";}'
+      - '{"enabled" = 1;"name" = "DIRECTORIES";}'
+      - '{"enabled" = 1;"name" = "PDF";}'
+      - '{"enabled" = 1;"name" = "FONTS";}'
+      - '{"enabled" = 0;"name" = "DOCUMENTS";}'
+      - '{"enabled" = 0;"name" = "MESSAGES";}'
+      - '{"enabled" = 0;"name" = "CONTACT";}'
+      - '{"enabled" = 0;"name" = "EVENT_TODO";}'
+      - '{"enabled" = 0;"name" = "IMAGES";}'
+      - '{"enabled" = 0;"name" = "BOOKMARKS";}'
+      - '{"enabled" = 0;"name" = "MUSIC";}'
+      - '{"enabled" = 0;"name" = "MOVIES";}'
+      - '{"enabled" = 0;"name" = "PRESENTATIONS";}'
+      - '{"enabled" = 0;"name" = "SPREADSHEETS";}'
+      - '{"enabled" = 0;"name" = "SOURCE";}'
+      - '{"enabled" = 0;"name" = "MENU_DEFINITION";}'
+      - '{"enabled" = 0;"name" = "MENU_OTHER";}'
+      - '{"enabled" = 0;"name" = "MENU_CONVERSION";}'
+      - '{"enabled" = 0;"name" = "MENU_EXPRESSION";}'
+      - '{"enabled" = 0;"name" = "MENU_WEBSEARCH";}'
+      - '{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - spotlight
+    - macos
+    - osx_defaults
+
+- name: Reload Spotlight settings
+  osx_defaults:
+    domain: -currentHost
+    key: com.apple.spotlight orderedItems
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - spotlight
+    - macos
+    - osx_defaults
+
+- name: Restart mds
+  command: "killall mds > /dev/null 2>&1"
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - spotlight
+    - macos
+    - osx_defaults
+
+- name: Enable indexing for the main volume
+  command: "sudo mdutil -i on / > /dev/null"
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - spotlight
+    - macos
+    - osx_defaults
+
+- name: Rebuild Spotlight index
+  command: "sudo mdutil -E / > /dev/null"
+  when: ansible_os_family == 'Darwin'
+  tags:
+    - spotlight
+    - macos
+    - osx_defaults
+
+- name: Set Google Chrome as default browser
+  command: open -a "Google Chrome" --args --make-default-browser
+  args:
+    executable: /bin/bash
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Disable sensitive backswipe in Chrome
+  osx_defaults:
+    domain: com.google.Chrome
+    key: AppleEnableSwipeNavigateWithScrolls
+    value: false
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Disable sensitive backswipe in Chrome Canary
+  osx_defaults:
+    domain: com.google.Chrome.canary
+    key: AppleEnableSwipeNavigateWithScrolls
+    value: false
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Disable mouse backswipe in Chrome
+  osx_defaults:
+    domain: com.google.Chrome
+    key: AppleEnableMouseSwipeNavigateWithScrolls
+    value: false
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Disable mouse backswipe in Chrome Canary
+  osx_defaults:
+    domain: com.google.Chrome.canary
+    key: AppleEnableMouseSwipeNavigateWithScrolls
+    value: false
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Use system print dialog and expand it in Chrome
+  osx_defaults:
+    domain: com.google.Chrome
+    key: DisablePrintPreview
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Use system print dialog and expand it in Chrome Canary
+  osx_defaults:
+    domain: com.google.Chrome.canary
+    key: DisablePrintPreview
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Expand save and print panel by default
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Expand save and print panel by default (mode 2)
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode2
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Expand print panel by default
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: PMPrintingExpandedStateForPrint
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Expand print panel by default (print 2)
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: PMPrintingExpandedStateForPrint2
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+
 ###################################
 # APPLE                           #
 ###################################
@@ -321,15 +835,6 @@
     - osx_defaults
     - dock
 
-
-- name: Dockutil | Remove all dock items
-  shell: dockutil --remove all --no-restart
-
-- name: Dockutil | Adding items
-  shell: dockutil --add '{{ item.path }}' --position {{ item.pos }}
-  with_items: "{{ dockitems_to_persist }}"
-  loop_control:
-    label: "{{item}}"
 
 
   #### FINDER ####

@@ -31,6 +31,7 @@
       - direnv
       - docker-compose
       - docker-machine
+      - eslint
       - fzf
       - fzy
       - jq
@@ -38,6 +39,8 @@
       - lua-language-server
       - neovim
       - node
+      - prettier
+      - prettierd
       - pyright
       - ripgrep
       - rust-analyzer
