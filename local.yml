@@ -6,6 +6,7 @@
     work: "{{ lookup('env', 'HOME') }}/Developer/superpowerdotcom"
     brew_cask_packages:
       - 1password
+      - adoptopenjdk
       - cron
       - discord
       - docker
@@ -16,12 +17,14 @@
       - ledger-live
       - linear-linear
       - notion
+      - openscad
       - pgadmin4
       - postman
       - qbittorrent
       - slack
       - sublime-text
       - superhuman
+      - ultimaker-cura
       - zoom
     brew_packages:
       - autoconf
@@ -31,20 +34,27 @@
       - direnv
       - docker-compose
       - docker-machine
+      - dopplerhq/cli/doppler
       - eslint
       - fzf
       - fzy
       - jq
       - koekeishiya/formulae/skhd
+      - koekeishiya/formulae/yabai
+      - kubectl
       - lua-language-server
+      - minikube
       - neovim
       - node
+      - postgresql@14
       - prettier
       - prettierd
       - pyright
       - ripgrep
       - rust-analyzer
       - stow
+      - temporal
+      - thefuck
       - tmux
       - typescript-language-server
       - tree

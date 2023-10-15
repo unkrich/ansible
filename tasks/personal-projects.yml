@@ -8,4 +8,18 @@
     repo: 'git@github.com:unkrich/ansible.git'
     dest: "{{ personal }}/ansible"
   tags:
-    - work-project
+    - personal-project
+
+- name: Dotfiles
+  ansible.builtin.git:
+    repo: 'git@github.com:unkrich/dotfiles.git'
+    dest: "{{ personal }}/dotfiles"
+  tags:
+    - personal-project
+
+- name: ZMK Config
+  ansible.builtin.git:
+    repo: 'git@github.com:unkrich/zmk-config-zen-2.git'
+    dest: "{{ personal }}/zmk-config-zen-2"
+  tags:
+    - personal-project
