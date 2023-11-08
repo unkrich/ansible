@@ -38,6 +38,7 @@
       - eslint
       - fzf
       - fzy
+      - helm
       - jq
       - koekeishiya/formulae/skhd
       - koekeishiya/formulae/yabai
