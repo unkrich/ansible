@@ -1,0 +1,112 @@
+# - name: Set Google Chrome as default browser
+  # command: open -a "Google Chrome" --args --make-default-browser
+  # args:
+    # executable: /bin/bash
+  # tags:
+    # - chrome
+    # - macos
+    # - osx_defaults
+
+# - name: Disable sensitive backswipe in Chrome
+  # osx_defaults:
+    # domain: com.google.Chrome
+    # key: AppleEnableSwipeNavigateWithScrolls
+    # value: false
+  # tags:
+    # - chrome
+    # - macos
+    # - osx_defaults
+
+# - name: Disable sensitive backswipe in Chrome Canary
+  # osx_defaults:
+    # domain: com.google.Chrome.canary
+    # key: AppleEnableSwipeNavigateWithScrolls
+    # value: false
+  # tags:
+    # - chrome
+    # - macos
+    # - osx_defaults
+
+# - name: Disable mouse backswipe in Chrome
+  # osx_defaults:
+    # domain: com.google.Chrome
+    # key: AppleEnableMouseSwipeNavigateWithScrolls
+    # value: false
+  # tags:
+    # - chrome
+    # - macos
+    # - osx_defaults
+
+# - name: Disable mouse backswipe in Chrome Canary
+  # osx_defaults:
+    # domain: com.google.Chrome.canary
+    # key: AppleEnableMouseSwipeNavigateWithScrolls
+    # value: false
+  # tags:
+    # - chrome
+    # - macos
+    # - osx_defaults
+
+# - name: Use system print dialog and expand it in Chrome
+  # osx_defaults:
+    # domain: com.google.Chrome
+    # key: DisablePrintPreview
+    # value: true
+  # tags:
+    # - chrome
+    # - macos
+    # - osx_defaults
+
+# - name: Use system print dialog and expand it in Chrome Canary
+  # osx_defaults:
+    # domain: com.google.Chrome.canary
+    # key: DisablePrintPreview
+    # value: true
+  # tags:
+    # - chrome
+    # - macos
+    # - osx_defaults
+
+- name: Expand save and print panel by default
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode
+    type: bool
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Expand save and print panel by default (mode 2)
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSNavPanelExpandedStateForSaveMode2
+    type: bool
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Expand print panel by default
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: PMPrintingExpandedStateForPrint
+    type: bool
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+
+- name: Expand print panel by default (print 2)
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: PMPrintingExpandedStateForPrint2
+    value: true
+  tags:
+    - chrome
+    - macos
+    - osx_defaults
+

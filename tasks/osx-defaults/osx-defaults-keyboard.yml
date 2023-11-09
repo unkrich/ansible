@@ -1,0 +1,155 @@
+- name: Disable smart dashes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticDashSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+
+- name: Disable automatic period substitution
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticPeriodSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+
+- name: Disable smart quotes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticQuoteSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+
+- name: Disable automatic spelling correction
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+  tags:
+    - text
+    - keyboard
+    - macos
+    - osx_defaults
+
+# Remap Caps Lock to CTRL
+- name: Remap caps lock to CTRL
+  shell: hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0}]}'
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Tab in modals
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleKeyboardUIMode
+    type: int
+    value: 3
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Update key repeat default initial
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: 10
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Update key repeat continued
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: 1
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+  
+# Disable automatic period substitution
+- name: Disable automatic period substitution
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticPeriodSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# Disable smart quotes as they're annoying when typing code
+- name: Disable smart quotes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticQuoteSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# Disable smart dashes
+- name: Disable smart dashes
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticDashSubstitutionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+- name: Disable automatic capitalization
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticCapitalizationEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+
+- name: Disable automatic spelling correction
+  osx_defaults:
+    domain: NSGlobalDomain
+    key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+  tags:
+    - macos
+    - osx_defaults
+    - keyboard
+
+# - name: Run capslocktoctl script
+  # script: scripts/capslocktoctl.scpt
+  # tags:
+    # - keyboard
+    # - macos
+    # - osx_defaults

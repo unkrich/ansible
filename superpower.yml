@@ -1,3 +1,5 @@
 - hosts: localhost
+  vars:
+    work: "{{ lookup('env', 'HOME') }}/Developer/superpowerdotcom"
   tasks:
     - include: superpower/work-projects.yml

@@ -4,8 +4,9 @@
     - work-project
 
 - name: Superpower
+  become_user: kevinunkrich
   ansible.builtin.git:
-    repo: 'git@github.com:superpowerdotcome/superpower.git'
+    repo: 'git@github.com:superpowerdotcom/superpower.git'
     dest: "{{ work }}/superpower"
   tags:
     - work-project

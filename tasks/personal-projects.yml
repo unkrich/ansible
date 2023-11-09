@@ -4,22 +4,31 @@
     - personal-project
 
 - name: Ansible
+  become_user: kevinunkrich
+  become: true
   ansible.builtin.git:
     repo: 'git@github.com:unkrich/ansible.git'
     dest: "{{ personal }}/ansible"
+    key_file: ~/.ssh/id_rsa
   tags:
     - personal-project
 
 - name: Dotfiles
+  become_user: kevinunkrich
+  become: true
   ansible.builtin.git:
     repo: 'git@github.com:unkrich/dotfiles.git'
     dest: "{{ personal }}/dotfiles"
+    key_file: ~/.ssh/id_rsa
   tags:
     - personal-project
 
 - name: ZMK Config
+  become_user: kevinunkrich
+  become: true
   ansible.builtin.git:
     repo: 'git@github.com:unkrich/zmk-config-zen-2.git'
     dest: "{{ personal }}/zmk-config-zen-2"
+    key_file: ~/.ssh/id_rsa
   tags:
     - personal-project
