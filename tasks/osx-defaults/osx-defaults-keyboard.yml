@@ -147,9 +147,25 @@
     - osx_defaults
     - keyboard
 
-# - name: Run capslocktoctl script
-  # script: scripts/capslocktoctl.scpt
-  # tags:
-    # - keyboard
-    # - macos
-    # - osx_defaults
+- name: Remap caps lock to left control
+  shell: hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x7000000E0}]}'
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
+
+- name: Check if caps lock hidutil plist file exists
+  stat:
+    path: ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
+  register: register_name
+
+- name: copy caps lock hidutil plist file
+  shell: cp ./macos/local.hidutilKeyMapping.plist ~/library/launchagents/local.hidutilKeyMapping.plist
+  when:
+    - not register_name.stat.exists
+
+- name: launchctl caps lock hidutil
+  shell: launchctl load ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
+  when:
+    - not register_name.stat.exists
+

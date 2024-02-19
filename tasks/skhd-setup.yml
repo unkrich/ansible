@@ -1,0 +1,15 @@
+- name: Check if skhd plist file exists
+  stat:
+    path: ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
+  register: register_name
+
+- name: copy skhd plist file
+  shell: cp ./macos/com.koekeishiya.skhd.plist ~/library/launchagents/com.koekeishiya.skhd.plist
+  when:
+    - not register_name.stat.exists
+
+- name: launchctl skhd
+  shell: launchctl load ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
+  when:
+    - not register_name.stat.exists
+

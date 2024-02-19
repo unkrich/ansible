@@ -1,0 +1,16 @@
+- name: Check if sketchybar plist file exists
+  stat:
+    path: ~/Library/LaunchAgents/felixkratz.formulae.sketchybar.plist
+  register: register_name
+
+- name: copy sketchybar plist file
+  shell: cp ./macos/felixkratz.formulae.sketchybar.plist ~/library/launchagents/felixkratz.formulae.sketchybar.plist
+  when:
+    - not register_name.stat.exists
+
+- name: launchctl sketchybar
+  shell: launchctl load ~/Library/LaunchAgents/felixkratz.formulae.sketchybar.plist
+  when:
+    - not register_name.stat.exists
+
+

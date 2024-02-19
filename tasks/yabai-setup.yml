@@ -1,0 +1,30 @@
+# - name: Configure yabai scripting addition
+#   shell: sudo visudo -f /private/etc/sudoers.d/yabai
+#   become: true
+#     <user> ALL=(root) NOPASSWD: sha256:<hash> <yabai> --load-sa
+
+# sudo yabai --install-sa
+- name: Check if yabai
+  stat:
+    path: /opt/homebrew/bin/yabai
+  register: yabai_exists
+
+- name: Install yabai from HEAD
+  shell: brew install koekeishiya/formulae/yabai --HEAD
+  when:
+    - not yabai_exists.stat.exists
+
+- name: Check if yabai plist file exists
+  stat:
+    path: ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
+  register: register_name
+
+- name: copy yabai plist file
+  shell: cp ./macos/com.koekeishiya.yabai.plist ~/library/launchagents/com.koekeishiya.yabai.plist
+  when:
+    - not register_name.stat.exists
+
+- name: launchctl yabai
+  shell: launchctl load ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
+  when:
+    - not register_name.stat.exists
