@@ -1,5 +1,5 @@
-# - name: Authenticate github
-# shell: ssh -T git@github.com
+- name: Authenticate github
+  shell: ssh -T git@github.com
 
 - name: Git personal setup email
   git_config:

@@ -154,13 +154,22 @@
     - macos
     - osx_defaults
 
+- name: Create launchagents directory
+  ansible.builtin.file:
+    path: ~/Library/launchagents
+    state: directory
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
+
 - name: Check if caps lock hidutil plist file exists
   stat:
     path: ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
   register: register_name
 
 - name: copy caps lock hidutil plist file
-  shell: cp ./macos/local.hidutilKeyMapping.plist ~/library/launchagents/local.hidutilKeyMapping.plist
+  shell: cp ./macos/local.hidutilKeyMapping.plist ~/Library/launchagents/local.hidutilKeyMapping.plist
   when:
     - not register_name.stat.exists
 

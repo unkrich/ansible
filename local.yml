@@ -16,7 +16,7 @@
       - google-chrome
       - hammerspoon
       - hazel
-      - hpedrorodrigues/tools/dockutil
+      # - dockutil
       - karabiner-elements
       - iterm2
       - ledger-live
@@ -60,7 +60,7 @@
       - pyright
       - ripgrep
       - rust-analyzer
-      - sketchybar
+      # - sketchybar
       - stow
       - tailscale
       - temporal
@@ -106,15 +106,18 @@
     upgrade_homebrew_packages: false
   tasks:
     - include: tasks/sketchybar-setup.yml
-    # - include: tasks/ssh.yml
-    # - include: tasks/setup-brew.yml
-    # - include: tasks/osx-defaults/osx-defaults-apple.yml
+    - include: tasks/ssh.yml
+    - include: tasks/git-setup.yml
+    - include: tasks/setup-brew.yml
+    - include: tasks/productivity-tools.yml
+    - include: tasks/personal-projects.yml
+    - include: tasks/osx-defaults/osx-defaults-apple.yml
     #   # - include: tasks/osx-defaults-chrome.yml
     # - include: tasks/osx-defaults/osx-defaults-dock.yml
-    # - include: tasks/osx-defaults/osx-defaults-finder.yml
-    # - include: tasks/osx-defaults/osx-defaults-keyboard.yml
-    #   # - include: tasks/osx-defaults-spotlight.yml
-    # - include: tasks/dotfiles.yml
+    - include: tasks/osx-defaults/osx-defaults-finder.yml
+    - include: tasks/osx-defaults/osx-defaults-keyboard.yml
+    - include: tasks/zsh-setup.yml
+      # - include: tasks/osx-defaults-spotlight.yml
+    - include: tasks/dotfiles.yml
     # - include: tasks/skhd-setup.yml
     # - include: tasks/yabai-setup.yml
-    # - include: tasks/zsh-setup.yml
