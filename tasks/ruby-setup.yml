@@ -1,0 +1,2 @@
+- name: Install latest ruby
+  shell: ruby-install ruby

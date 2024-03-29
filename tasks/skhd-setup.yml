@@ -3,13 +3,12 @@
     path: ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
   register: register_name
 
-- name: copy skhd plist file
-  shell: cp ./macos/com.koekeishiya.skhd.plist ~/library/launchagents/com.koekeishiya.skhd.plist
+- name: Install skhd service file
+  shell: skhd --install-service
   when:
     - not register_name.stat.exists
 
-- name: launchctl skhd
-  shell: launchctl load ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
+- name: Start skhd
+  shell: skhd --start-service
   when:
     - not register_name.stat.exists
-

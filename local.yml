@@ -4,11 +4,11 @@
     dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
     personal: "{{ lookup('env', 'HOME') }}/Developer/unkrich"
     work: "{{ lookup('env', 'HOME') }}/Developer/superpowerdotcom"
-    # brew_taps:
-    #   - FelixKratz/formulae
+    brew_taps:
+      - FelixKratz/formulae
     brew_cask_packages:
       - 1password
-      # - adoptopenjdk
+      - adoptopenjdk
       - arc
       - cron
       - discord
@@ -16,7 +16,6 @@
       - google-chrome
       - hammerspoon
       - hazel
-      # - dockutil
       - karabiner-elements
       - iterm2
       - ledger-live
@@ -29,16 +28,18 @@
       - slack
       - sublime-text
       - superhuman
+      - tailscale
       - ultimaker-cura
       - zoom
     brew_packages:
       - autoconf
       - awscli
-      # - clangd
+      - chruby
       - defaultbrowser
       - direnv
       - docker-compose
       - docker-machine
+      - dockutil
       - dopplerhq/cli/doppler
       - eslint
       - fzf
@@ -47,6 +48,7 @@
       - jq
       - koekeishiya/formulae/skhd
       - koekeishiya/formulae/yabai
+      - kompose
       - kops
       - kubectl
       - k9s
@@ -59,16 +61,17 @@
       - prettierd
       - pyright
       - ripgrep
+      - ruby-install
       - rust-analyzer
-      # - sketchybar
+      - sketchybar
       - stow
-      - tailscale
       - temporal
       - temporalio/brew/tcld
       - thefuck
       - tmux
       - typescript-language-server
       - tree
+      - virtualenv
       - yarn
       - zsh-syntax-highlighting
     dockitems_to_persist:
@@ -84,8 +87,8 @@
       - name: Discord
         path: "/Applications/Discord.app"
         pos: 4
-      - name: Cron
-        path: "/Applications/Cron.app"
+      - name: Notion Calendar
+        path: "/Applications/Notion\ Calendar.app"
         pos: 5
       - name: Superhuman
         path: "/Applications/Superhuman.app"
@@ -105,19 +108,16 @@
     install_homebrew_if_missing: true
     upgrade_homebrew_packages: false
   tasks:
-    - include: tasks/sketchybar-setup.yml
     - include: tasks/ssh.yml
     - include: tasks/git-setup.yml
     - include: tasks/setup-brew.yml
-    - include: tasks/productivity-tools.yml
+    - include: tasks/zsh-setup.yml
     - include: tasks/personal-projects.yml
     - include: tasks/osx-defaults/osx-defaults-apple.yml
-    #   # - include: tasks/osx-defaults-chrome.yml
-    # - include: tasks/osx-defaults/osx-defaults-dock.yml
+    - include: tasks/osx-defaults/osx-defaults-dock.yml
     - include: tasks/osx-defaults/osx-defaults-finder.yml
     - include: tasks/osx-defaults/osx-defaults-keyboard.yml
-    - include: tasks/zsh-setup.yml
-      # - include: tasks/osx-defaults-spotlight.yml
     - include: tasks/dotfiles.yml
-    # - include: tasks/skhd-setup.yml
-    # - include: tasks/yabai-setup.yml
+    - include: tasks/sketchybar-setup.yml
+    - include: tasks/skhd-setup.yml
+    - include: tasks/yabai-setup.yml

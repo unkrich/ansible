@@ -19,12 +19,12 @@
     path: ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
   register: register_name
 
-- name: copy yabai plist file
-  shell: cp ./macos/com.koekeishiya.yabai.plist ~/library/launchagents/com.koekeishiya.yabai.plist
+- name: Install yabai plist file
+  shell: yabai --install-service
   when:
     - not register_name.stat.exists
 
-- name: launchctl yabai
-  shell: launchctl load ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
+- name: Start yabai
+  shell: yabai --start-service
   when:
     - not register_name.stat.exists

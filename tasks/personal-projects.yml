@@ -4,13 +4,13 @@
     - personal-project
 
 # - name: Ansible
-  # become: true
-  # ansible.builtin.git:
-    # repo: 'git@github.com:unkrich/ansible.git'
-    # dest: "{{ personal }}/ansible"
-    # key_file: ~/.ssh/id_rsa
-  # tags:
-    # - personal-project
+#   become: true
+#   ansible.builtin.git:
+#     repo: 'git@github.com:unkrich/ansible.git'
+#     dest: "{{ personal }}/ansible"
+#     key_file: ~/.ssh/id_rsa
+#   tags:
+#     - personal-project
 
 - name: Dotfiles
   become_user: unkrich

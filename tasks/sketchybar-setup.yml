@@ -8,9 +8,12 @@
   when:
     - not register_name.stat.exists
 
-- name: launchctl sketchybar
-  shell: launchctl load ~/Library/LaunchAgents/felixkratz.formulae.sketchybar.plist
+- name: launchctl unload sketchybar
+  shell: launchctl unload ~/Library/LaunchAgents/felixkratz.formulae.sketchybar.plist
   when:
     - not register_name.stat.exists
 
-
+- name: launchctl load sketchybar
+  shell: launchctl load ~/Library/LaunchAgents/felixkratz.formulae.sketchybar.plist
+  when:
+    - not register_name.stat.exists
