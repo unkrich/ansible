@@ -67,6 +67,7 @@
       - stow
       - temporal
       - temporalio/brew/tcld
+      - terraform
       - thefuck
       - tmux
       - typescript-language-server
