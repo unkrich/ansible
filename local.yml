@@ -44,6 +44,7 @@
       - eslint
       - fzf
       - fzy
+      - gmailctl
       - helm
       - jq
       - koekeishiya/formulae/skhd
@@ -56,6 +57,7 @@
       - minikube
       - neovim
       - node
+      - nvm
       - postgresql@14
       - prettier
       - prettierd
