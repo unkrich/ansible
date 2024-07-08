@@ -9,6 +9,7 @@
     brew_cask_packages:
       - 1password
       - adoptopenjdk
+      - alacritty
       - arc
       - cron
       - discord
@@ -17,7 +18,6 @@
       - hammerspoon
       - hazel
       - karabiner-elements
-      - iterm2
       - ledger-live
       - linear-linear
       - font-meslo-lg-nerd-font
@@ -26,6 +26,7 @@
       - pgadmin4
       - postman
       - qbittorrent
+      - sf-symbols
       - slack
       - sublime-text
       - superhuman
@@ -43,10 +44,12 @@
       - dockutil
       - dopplerhq/cli/doppler
       - eslint
+      - font-sf-pro
       - fzf
       - fzy
       - gmailctl
       - helm
+      - jesseduffield/lazygit/lazygit
       - jq
       - koekeishiya/formulae/skhd
       - koekeishiya/formulae/yabai
@@ -60,6 +63,7 @@
       - node
       - nvm
       - postgresql@14
+      - powerlevel10k
       - prettier
       - prettierd
       - pyright
