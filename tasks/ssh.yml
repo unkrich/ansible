@@ -36,6 +36,9 @@
 - name: Add SSH Key to agent
   shell: ssh-add ~/.ssh/id_rsa
 
+- name: Add GitHub to known hosts
+  shell: ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
     # - name: Check if Agent Forwarding is allowed
     # shell: grep -c "^AllowAgentForwarding yes" /etc/ssh/sshd_config || true
     # register: test_forwarding

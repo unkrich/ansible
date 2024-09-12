@@ -87,7 +87,6 @@
     - osx_defaults
     - keyboard
 
-  
 # Disable automatic period substitution
 - name: Disable automatic period substitution
   osx_defaults:
@@ -135,7 +134,6 @@
     - osx_defaults
     - keyboard
 
-
 - name: Disable automatic spelling correction
   osx_defaults:
     domain: NSGlobalDomain
@@ -173,8 +171,19 @@
   when:
     - not register_name.stat.exists
 
+- name: Check if caps lock hidutil sudoer exists
+  stat:
+    path: /etc/sudoers.d/hidutil
+  register: sudoer_file
+
+- name: create sudoer file
+  shell: >
+    echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which hidutil) | cut -d " " -f 1) $(which hidutil)"
+  become: true
+  when:
+    - not sudoer_file.stat.exists
+
 - name: launchctl caps lock hidutil
   shell: launchctl load ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
   when:
     - not register_name.stat.exists
-

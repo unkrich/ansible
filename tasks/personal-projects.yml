@@ -13,7 +13,7 @@
 #     - personal-project
 
 - name: Dotfiles
-  become_user: unkrich
+  become_user: kevinunkrich
   become: true
   ansible.builtin.git:
     repo: 'git@github.com:unkrich/dotfiles.git'
@@ -23,7 +23,7 @@
     - personal-project
 
 - name: ZMK Config
-  become_user: unkrich
+  become_user: kevinunkrich
   become: true
   ansible.builtin.git:
     repo: 'git@github.com:unkrich/zmk-config-zen-2.git'

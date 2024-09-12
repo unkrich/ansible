@@ -44,7 +44,7 @@
       - dockutil
       - dopplerhq/cli/doppler
       - eslint
-      - font-sf-pro
+      # - font-sf-pro
       - fzf
       - fzy
       - gmailctl
@@ -66,6 +66,7 @@
       - powerlevel10k
       - prettier
       - prettierd
+      - protobuf
       - pyright
       - ripgrep
       - ruby-install
@@ -121,11 +122,11 @@
     - include: tasks/setup-brew.yml
     - include: tasks/zsh-setup.yml
     - include: tasks/personal-projects.yml
+    - include: tasks/dotfiles.yml
     - include: tasks/osx-defaults/osx-defaults-apple.yml
     - include: tasks/osx-defaults/osx-defaults-dock.yml
     - include: tasks/osx-defaults/osx-defaults-finder.yml
     - include: tasks/osx-defaults/osx-defaults-keyboard.yml
-    - include: tasks/dotfiles.yml
     - include: tasks/sketchybar-setup.yml
     - include: tasks/skhd-setup.yml
     - include: tasks/yabai-setup.yml
