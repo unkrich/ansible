@@ -47,6 +47,7 @@
       # - font-sf-pro
       - fzf
       - fzy
+      - gh
       - gmailctl
       - helm
       - jesseduffield/lazygit/lazygit
