@@ -82,6 +82,7 @@
       - typescript-language-server
       - tree
       - virtualenv
+      - withgraphite/tap/graphite
       - yarn
       - zsh-syntax-highlighting
     dockitems_to_persist:
