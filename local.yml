@@ -8,7 +8,7 @@
       - FelixKratz/formulae
     brew_cask_packages:
       - 1password
-      - adoptopenjdk
+      # - adoptopenjdk
       - alacritty
       - arc
       - cron
@@ -124,7 +124,7 @@
     - include: tasks/setup-brew.yml
     - include: tasks/zsh-setup.yml
     - include: tasks/personal-projects.yml
-    # - include: tasks/dotfiles.yml
+    - include: tasks/dotfiles.yml
     - include: tasks/osx-defaults/osx-defaults-apple.yml
     - include: tasks/osx-defaults/osx-defaults-dock.yml
     - include: tasks/osx-defaults/osx-defaults-finder.yml
