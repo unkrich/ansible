@@ -11,6 +11,7 @@
       # - adoptopenjdk
       - alacritty
       - arc
+      - betterdisplay
       - cron
       - discord
       - docker
