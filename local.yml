@@ -21,6 +21,7 @@
       - ledger-live
       - linear-linear
       - font-meslo-lg-nerd-font
+      - font-hack-nerd-font
       - notion
       - openscad
       - pgadmin4
@@ -44,7 +45,6 @@
       - dockutil
       - dopplerhq/cli/doppler
       - eslint
-      # - font-sf-pro
       - fzf
       - fzy
       - gh
