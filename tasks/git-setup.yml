@@ -1,5 +1,5 @@
-# - name: Authenticate github
-#   shell: ssh -T git@github.com
+- name: Authenticate github
+  shell: ssh -T git@github.com
 
 - name: Git personal setup email
   git_config:
@@ -7,11 +7,11 @@
     scope: global
     value: "kevin@unkri.ch"
   tags:
-  - git-personal
+    - git-personal
 - name: Git personal setup name
   git_config:
     name: user.name
     scope: global
     value: "unkrich"
   tags:
-  - git-personal
+    - git-personal
