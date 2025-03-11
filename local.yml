@@ -37,6 +37,7 @@
       - ultimaker-cura
       - zoom
     brew_packages:
+      - 1password-cli
       - autoconf
       - awscli
       - chruby
@@ -74,6 +75,7 @@
       - ripgrep
       - ruby-install
       - rust-analyzer
+      - skaffold
       - sketchybar
       - stow
       - temporal
