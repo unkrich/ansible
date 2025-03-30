@@ -9,6 +9,7 @@
     brew_cask_packages:
       - 1password
       # - adoptopenjdk
+      - activitywatch
       - alacritty
       - arc
       - betterdisplay
