@@ -7,7 +7,6 @@
     
     <key>ProgramArguments</key>
     <array>
-        <string>/usr/bin/sudo</string>
         <string>/usr/bin/hidutil</string>
         <string>property</string>
         <string>--set</string>

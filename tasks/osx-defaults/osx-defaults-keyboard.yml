@@ -152,38 +152,45 @@
     - macos
     - osx_defaults
 
-- name: Create launchagents directory
-  ansible.builtin.file:
-    path: ~/Library/launchagents
-    state: directory
+- name: Unload existing LaunchAgent if present
+  ansible.builtin.command: launchctl unload ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
+  ignore_errors: true
   tags:
     - keyboard
     - macos
     - osx_defaults
 
-- name: Check if caps lock hidutil plist file exists
+- name: Check if caps lock hidutil daemon exists
   stat:
-    path: ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
-  register: register_name
+    path: /Library/LaunchDaemons/local.hidutilKeyMapping.plist
+  register: daemon_exists
+  become: true
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
 
-- name: copy caps lock hidutil plist file
-  shell: cp ./macos/local.hidutilKeyMapping.plist ~/Library/launchagents/local.hidutilKeyMapping.plist
-  when:
-    - not register_name.stat.exists
-
-- name: Check if caps lock hidutil sudoer exists
-  stat:
-    path: /etc/sudoers.d/hidutil
-  register: sudoer_file
-
-- name: create sudoer file
-  shell: >
-    echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which hidutil) | cut -d " " -f 1) $(which hidutil)"
+- name: Copy caps lock hidutil plist to LaunchDaemons
+  ansible.builtin.copy:
+    src: ./macos/local.hidutilKeyMapping.plist
+    dest: /Library/LaunchDaemons/local.hidutilKeyMapping.plist
+    owner: root
+    group: wheel
+    mode: "0644"
   become: true
   when:
-    - not sudoer_file.stat.exists
+    - not daemon_exists.stat.exists
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
 
-- name: launchctl caps lock hidutil
-  shell: launchctl load ~/Library/LaunchAgents/local.hidutilKeyMapping.plist
+- name: Load caps lock hidutil daemon
+  ansible.builtin.command: launchctl load /Library/LaunchDaemons/local.hidutilKeyMapping.plist
+  become: true
   when:
-    - not register_name.stat.exists
+    - not daemon_exists.stat.exists
+  tags:
+    - keyboard
+    - macos
+    - osx_defaults
