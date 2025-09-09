@@ -1,9 +1,22 @@
-# - name: Configure yabai scripting addition
-#   shell: sudo visudo -f /private/etc/sudoers.d/yabai
-#   become: true
-#     <user> ALL=(root) NOPASSWD: sha256:<hash> <yabai> --load-sa
+- name: Get yabai executable path
+  shell: which yabai
+  register: yabai_path
+  changed_when: false
+  tags:
+    - yabai
+    - scripting-addition
 
-# sudo yabai --install-sa
+- name: Configure sudoers for yabai scripting addition
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/yabai
+    line: "{{ ansible_user_id }} ALL=(root) NOPASSWD: {{ yabai_path.stdout }} --load-sa"
+    create: yes
+    mode: '0440'
+    validate: '/usr/sbin/visudo -cf %s'
+  become: true
+  tags:
+    - yabai
+    - scripting-addition
 - name: Check if yabai
   stat:
     path: /opt/homebrew/bin/yabai
@@ -14,17 +27,20 @@
   when:
     - not yabai_exists.stat.exists
 
-- name: Check if yabai plist file exists
-  stat:
-    path: ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
-  register: register_name
-
-- name: Install yabai plist file
+- name: Install yabai service
   shell: yabai --install-service
-  when:
-    - not register_name.stat.exists
+  ignore_errors: true
+  tags:
+    - yabai
 
-- name: Start yabai
-  shell: yabai --start-service
-  when:
-    - not register_name.stat.exists
+- name: Bootstrap yabai launchd service
+  shell: launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.koekeishiya.yabai.plist
+  ignore_errors: true
+  tags:
+    - yabai
+
+- name: Enable yabai service to start at login
+  shell: launchctl enable gui/$(id -u)/com.koekeishiya.yabai
+  ignore_errors: true
+  tags:
+    - yabai

@@ -1,14 +1,17 @@
-- name: Check if skhd plist file exists
-  stat:
-    path: ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
-  register: register_name
-
-- name: Install skhd service file
+- name: Install skhd service
   shell: skhd --install-service
-  when:
-    - not register_name.stat.exists
+  ignore_errors: true
+  tags:
+    - skhd
 
-- name: Start skhd
-  shell: skhd --start-service
-  when:
-    - not register_name.stat.exists
+- name: Bootstrap skhd launchd service
+  shell: launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.koekeishiya.skhd.plist
+  ignore_errors: true
+  tags:
+    - skhd
+
+- name: Enable skhd service to start at login
+  shell: launchctl enable gui/$(id -u)/com.koekeishiya.skhd
+  ignore_errors: true
+  tags:
+    - skhd

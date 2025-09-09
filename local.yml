@@ -89,6 +89,7 @@
       - virtualenv
       - withgraphite/tap/graphite
       - yarn
+      - z
       - zsh-syntax-highlighting
     dockitems_to_persist:
       - name: Arc
