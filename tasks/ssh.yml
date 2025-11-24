@@ -26,7 +26,7 @@
     - install
     - ssh
 - name: Set authorized key taken from file
-  authorized_key:
+  ansible.builtin.authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     state: present
     key: "{{ lookup('file', item) }}"
@@ -49,7 +49,7 @@
     - ssh
 
 - name: Add GitHub to known hosts
-  known_hosts:
+  ansible.builtin.known_hosts:
     name: github.com
     key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
     state: present

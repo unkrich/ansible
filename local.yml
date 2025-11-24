@@ -139,16 +139,16 @@
     install_homebrew_if_missing: true
     upgrade_homebrew_packages: false
   tasks:
-    - include: tasks/ssh.yml
-    - include: tasks/git-setup.yml
-    - include: tasks/setup-brew.yml
-    - include: tasks/zsh-setup.yml
-    - include: tasks/personal-projects.yml
-    - include: tasks/dotfiles.yml
-    - include: tasks/osx-defaults/osx-defaults-apple.yml
-    - include: tasks/osx-defaults/osx-defaults-finder.yml
-    - include: tasks/osx-defaults/osx-defaults-keyboard.yml
-    # - include: tasks/sketchybar-setup.yml
-    # - include: tasks/skhd-setup.yml
-    # - include: tasks/yabai-setup.yml
-    - include: tasks/osx-defaults/osx-defaults-dock.yml
+    - include_tasks: tasks/ssh.yml
+    - include_tasks: tasks/git-setup.yml
+    - include_tasks: tasks/setup-brew.yml
+    - include_tasks: tasks/zsh-setup.yml
+    - include_tasks: tasks/personal-projects.yml
+    - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/osx-defaults/osx-defaults-apple.yml
+    - include_tasks: tasks/osx-defaults/osx-defaults-finder.yml
+    - include_tasks: tasks/osx-defaults/osx-defaults-keyboard.yml
+    # - include_tasks: tasks/sketchybar-setup.yml
+    # - include_tasks: tasks/skhd-setup.yml
+    # - include_tasks: tasks/yabai-setup.yml
+    - include_tasks: tasks/osx-defaults/osx-defaults-dock.yml
