@@ -21,6 +21,7 @@
       - hazel
       - ledger-live
       - linear-linear
+      - figma
       - font-meslo-lg-nerd-font
       - font-hack-nerd-font
       - notion
@@ -41,6 +42,7 @@
       - 1password-cli
       - autoconf
       - awscli
+      - bun
       - chruby
       - defaultbrowser
       - direnv
@@ -53,6 +55,8 @@
       - fzy
       - gh
       - gmailctl
+      - gnupg
+      - gopls
       - helm
       - jesseduffield/lazygit/lazygit
       - jq
@@ -62,22 +66,28 @@
       - kops
       - kubectl
       - k9s
+      - kustomize
       - lua-language-server
       - minikube
       - neovim
       - node
       - nvm
+      - openapi-generator
       - postgresql@14
       - powerlevel10k
+      - pnpm
       - prettier
       - prettierd
       - protobuf
+      - protolint
       - pyright
+      - rabbitmq
       - ripgrep
       - ruby-install
       - rust-analyzer
       - skaffold
       - sketchybar
+      - stern
       - stow
       - temporal
       - temporalio/brew/tcld
@@ -88,7 +98,9 @@
       - tree
       - virtualenv
       - withgraphite/tap/graphite
+      - yamllint
       - yarn
+      - yq
       - z
       - zsh-syntax-highlighting
     dockitems_to_persist:
