@@ -12,6 +12,7 @@
     src: "{{ source_key }}"
     dest: "{{ dest_key }}"
     mode: 0600
+  become: no
   tags:
     - dotfiles
     - install
