@@ -23,7 +23,20 @@
   shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   when:
     - not homebrew_check.stat.exists
-  tags: 
+  tags:
+    - homebrew
+    - brew
+    - install
+    - macos
+
+- name: Configuring Homebrew in Shell Profile
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+    create: yes
+  when:
+    - not homebrew_check.stat.exists
+  tags:
     - homebrew
     - brew
     - install
@@ -32,11 +45,15 @@
 - name: Updating Homebrew
   homebrew:
     update_homebrew: true
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   when: homebrew_check.stat.exists
 
 - name: Upgrading Homebrew Packages
   homebrew:
     upgrade_all: "{{ upgrade_homebrew_packages }}"
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   register: result
   until: result is successful
   when: homebrew_check.stat.exists
@@ -45,6 +62,8 @@
   homebrew_tap:
     name: "{{ brew_taps }}"
     state: present
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   register: result
   until: result is successful
   when: homebrew_check.stat.exists
@@ -53,6 +72,8 @@
   homebrew_cask:
     name: "{{ brew_cask_packages }}"
     state: present
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   register: result
   become_user: kevinunkrich
   become: true
@@ -63,6 +84,8 @@
   homebrew:
     name: "{{ brew_packages }}"
     state: present
+  environment:
+    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   register: result
   until: result is successful
   when: homebrew_check.stat.exists

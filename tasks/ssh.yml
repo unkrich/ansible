@@ -25,7 +25,7 @@
     - dotfiles
     - install
     - ssh
-- name: Set authorized key took from file
+- name: Set authorized key taken from file
   authorized_key:
     user: "{{ lookup('env', 'USER') }}"
     state: present
@@ -33,18 +33,25 @@
   with_fileglob:
     - "{{ lookup('env', 'HOME') }}/.ssh/*.pub"
 
+- name: Check if SSH key is already loaded in agent
+  shell: ssh-add -l | grep -q "$(ssh-keygen -lf {{ dest_key }}.pub | awk '{print $2}')"
+  register: key_loaded
+  failed_when: false
+  changed_when: false
+  tags:
+    - ssh
+
 - name: Add SSH Key to agent
-  shell: ssh-add ~/.ssh/id_rsa
+  shell: ssh-add {{ dest_key }}
+  when: key_loaded.rc != 0
+  ignore_errors: yes
+  tags:
+    - ssh
 
 - name: Add GitHub to known hosts
-  shell:
-    ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-
-    # - name: Check if Agent Forwarding is allowed
-    # shell: grep -c "^AllowAgentForwarding yes" /etc/ssh/sshd_config || true
-    # register: test_forwarding
-
-    # - name: Allow Agent Forwarding
-    # become: true
-    # ansible.builtin.command: echo "AllowAgentForwarding yes" >> ~/.ssh/config
-    # when: test_forwarding.stdout == "0"
+  known_hosts:
+    name: github.com
+    key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    state: present
+  tags:
+    - ssh

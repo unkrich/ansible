@@ -13,6 +13,8 @@
       - alacritty
       - arc
       - betterdisplay
+      - claude
+      - claude-code
       - cron
       - discord
       - docker
@@ -144,9 +146,9 @@
     - include: tasks/personal-projects.yml
     - include: tasks/dotfiles.yml
     - include: tasks/osx-defaults/osx-defaults-apple.yml
-    - include: tasks/osx-defaults/osx-defaults-dock.yml
     - include: tasks/osx-defaults/osx-defaults-finder.yml
     - include: tasks/osx-defaults/osx-defaults-keyboard.yml
     # - include: tasks/sketchybar-setup.yml
     # - include: tasks/skhd-setup.yml
     # - include: tasks/yabai-setup.yml
+    - include: tasks/osx-defaults/osx-defaults-dock.yml
