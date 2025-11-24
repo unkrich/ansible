@@ -1,5 +1,8 @@
 - name: Authenticate github
   shell: ssh -T git@github.com
+  register: github_auth
+  failed_when: github_auth.rc != 1 and github_auth.rc != 0
+  changed_when: false
 
 - name: Git personal setup email
   git_config:
