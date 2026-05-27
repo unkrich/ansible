@@ -19,7 +19,24 @@
     # - install
     # - macos
 
+- name: Create Homebrew prefix
+  become: true
+  file:
+    path: /opt/homebrew
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    group: admin
+    mode: "0755"
+  tags:
+    - homebrew
+    - brew
+    - install
+    - macos
+
 - name: Installing Homebrew
+  become: false
+  environment:
+    NONINTERACTIVE: "1"
   shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   when:
     - not homebrew_check.stat.exists
@@ -49,6 +66,16 @@
     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
   when: homebrew_check.stat.exists
 
+- name: Ensuring Homebrew Is Installed Again
+  stat:
+    path: /opt/homebrew/bin/brew
+  register: homebrew_check
+  tags: 
+    - homebrew
+    - brew
+    - install
+    - macos
+
 - name: Upgrading Homebrew Packages
   homebrew:
     upgrade_all: "{{ upgrade_homebrew_packages }}"
@@ -58,15 +85,15 @@
   until: result is successful
   when: homebrew_check.stat.exists
 
-- name: Installing Homebrew Taps
-  homebrew_tap:
-    name: "{{ brew_taps }}"
-    state: present
-  environment:
-    PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
-  register: result
-  until: result is successful
-  when: homebrew_check.stat.exists
+# - name: Installing Homebrew Taps
+#   homebrew_tap:
+#     name: "{{ brew_taps }}"
+#     state: present
+#   environment:
+#     PATH: "/opt/homebrew/bin:{{ ansible_env.PATH }}"
+#   register: result
+#   until: result is successful
+#   when: homebrew_check.stat.exists
 
 - name: Installing Homebrew Cask Packages
   homebrew_cask:
